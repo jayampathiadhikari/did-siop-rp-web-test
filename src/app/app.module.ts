@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QRCodeModule } from 'angularx-qrcode';
+import {Router} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -23,4 +24,12 @@ import { QRCodeModule } from 'angularx-qrcode';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private router: Router) {
+
+    // Use a custom replacer to display function names in the route configs
+    // const replacer = (key, value) => (typeof value === 'function') ? value.name : value;
+
+    // console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
+  }
+}

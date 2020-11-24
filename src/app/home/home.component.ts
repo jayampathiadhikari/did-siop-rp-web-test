@@ -1,6 +1,7 @@
 import { DidSiopService } from './../did-siop.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import uuid from '../uuid';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(public did_siop: DidSiopService, location: Location) {
     let response = location.path(true).split('#')[1];
     this.responseJWT = response;
-    did_siop.processResponse(response).then(result => {
+    did_siop.processResponse(response, uuid.getUUId()).then(result => {
       if(result.payload) this.did_user = result.payload.did;
       if(result.error) this.did_error = result;
       console.log(this.did_error);
