@@ -33,7 +33,7 @@ export class IndexComponent implements OnInit {
 
   constructor(public did_siop: DidSiopService, private router: Router) {
 
-    const server = 'https://e7452037d0af.ngrok.io/';
+    const server = 'https://did-siop-web-api.herokuapp.com/';
     did_siop.getRequest(uuid.getUUId()).then(res => {
       this.did_siop_request = res;
       console.log(res);
