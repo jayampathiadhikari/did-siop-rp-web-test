@@ -2,6 +2,7 @@ import { DidSiopService } from './../did-siop.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import uuid from '../uuid';
+import {url} from 'inspector';
 
 @Component({
   selector: 'app-home',
@@ -15,16 +16,30 @@ export class HomeComponent implements OnInit {
   public responseJWT;
 
   constructor(public did_siop: DidSiopService, location: Location) {
-    let response = location.path(true).split('#')[1];
+    const response = location.path(true).split('#')[1];
     this.responseJWT = response;
-    did_siop.processResponse(response, uuid.getUUId()).then(result => {
-      if(result.payload) this.did_user = result.payload.did;
-      if(result.error) this.did_error = result;
-      console.log(this.did_error);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    const urlParams = window.location.search;
+    if (urlParams !== '') {
+      did_siop.processResponse(response, uuid.getUUId()).then(result => {
+        if (result.payload) { this.did_user = result.payload.did; }
+        if (result.error) { this.did_error = result; }
+        console.log(this.did_error);
+      })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      did_siop.processResponse(response).then(result => {
+        if (result.payload) { this.did_user = result.payload.did; }
+        if (result.error) { this.did_error = result; }
+        console.log(this.did_error);
+      })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+
+
   }
   ngOnInit(): void {
   }

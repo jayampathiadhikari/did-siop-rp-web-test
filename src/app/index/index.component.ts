@@ -3,6 +3,7 @@ import { DidSiopService } from '../did-siop.service';
 import { faChrome, faFirefox, faEdge, faGoogleDrive } from '@fortawesome/free-brands-svg-icons';
 import uuid from "../uuid";
 import { Router } from '@angular/router';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-index',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 
 export class IndexComponent implements OnInit {
   did_siop_request: string;
+  did_siop_request_mobile:string;
   storesData = {
     chrome: {
       link: 'https://chrome.google.com/webstore/detail/did-siop/ondpkioapbcbamnjdimjfhaelgojblad?hl=en-US&gclid=EAIaIQobChMI8MWH0Pq46gIVig4rCh3qDwHKEAAYASAAEgJiiPD_BwE',
@@ -32,18 +34,23 @@ export class IndexComponent implements OnInit {
   };
 
   constructor(public did_siop: DidSiopService, private router: Router) {
-
+    this.did_siop_request = environment.did_siop_request;
     const server = 'https://did-siop-web-api.herokuapp.com/';
-    did_siop.getRequest(uuid.getUUId()).then(res => {
+    did_siop.getRequest().then(res => {
       this.did_siop_request = res;
       console.log(res);
     });
+    did_siop.getRequest(uuid.getUUId()).then(res => {
+      this.did_siop_request_mobile = res;
+      console.log(res);
+    });
+
     const source = new EventSource(`${server}subscribe?session_id=${uuid.getUUId()}`);
     source.addEventListener('message', message => {
       const data = JSON.parse(message.data);
       console.log(data);
       if (data.token) {
-        this.router.navigateByUrl(`/home#${data.token}`);
+        this.router.navigateByUrl(`/home?auth_mobile=true#${data.token}`);
       }
       // Display the event data in the `content` div
     });

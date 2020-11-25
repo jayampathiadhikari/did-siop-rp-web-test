@@ -14,7 +14,7 @@ export class DidSiopService {
     if (this.siop_rp === undefined) {
       console.log('INIT SIOP RP', uuid);
       this.siop_rp = await DID_SIOP.RP.getRP(
-        environment.redirect_uri + '?session_id=' + uuid, // RP's redirect_uri
+        uuid ? environment.redirect_uri + '?session_id=' + uuid : environment.redirect_uri, // RP's redirect_uri
         'did:ethr:0xB07Ead9717b44B6cF439c474362b9B0877CBBF83', // RP's did
         {
           jwks_uri: 'https://uniresolver.io/1.0/identifiers/did:example:0xab;transform-keys=jwks',
