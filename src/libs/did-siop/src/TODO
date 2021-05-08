@@ -1,0 +1,31 @@
+types of req:
+
+implicit: openid://?response_type=id_token
+              &client_id=https://rp.example.com/cb
+              &scope=openid did_authn
+              &request= <Request Object / JWT>
+
+auth_code: openid://?response_type=code
+               &client_id=https://rp.example.com/cb
+               &scope=openid did_authn
+               &request= <Request Object / JWT>
+
+auth_code:  openid://?response_type=id_token
+           			    &grant_type=authorization_code
+               &code=AUTHORIZATION_CODE
+               &client_id=https://rp.example.com/cb_id_token
+               &scope=openid did_authn
+               &request= <Request Object / JWT (request object used previously)>
+
+
+1. RP: GENERATE REQUEST
+send {response_type:'code'} as options parameter. default is 'id_token'
+
+2. Provider : Validate Request (validate_request method)
+returns an object with response_type
+
+3. Provider check response_type of request and generate response accordingly
+
+
+
+

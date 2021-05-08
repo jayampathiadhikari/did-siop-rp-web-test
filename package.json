@@ -29,7 +29,7 @@
     "@popperjs/core": "^2.3.3",
     "angularx-qrcode": "^2.3.5",
     "bootstrap": "^4.4.1",
-    "did-siop": "^1.4.4",
+    "did-siop": "file:src/libs/did-siop",
     "express": "^4.17.1",
     "jquery": "^3.5.0",
     "ngrok": "^3.3.0",
