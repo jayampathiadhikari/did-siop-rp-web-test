@@ -4,7 +4,9 @@ import { faChrome, faFirefox, faEdge, faGoogleDrive } from '@fortawesome/free-br
 import uuid from "../uuid";
 import { Router } from '@angular/router';
 import {environment} from "../../environments/environment";
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -38,11 +40,11 @@ export class IndexComponent implements OnInit {
     const server = 'https://did-siop-web-api.herokuapp.com/';
     did_siop.getRequest().then(res => {
       this.did_siop_request = res;
-      console.log(res);
+      console.log('REQUEST FOR EXTENSION', res);
     });
     did_siop.getRequest(uuid.getUUId()).then(res => {
       this.did_siop_request_mobile = res;
-      console.log(res);
+      console.log('REQUEST FOR MOBILE', res);
     });
 
     const source = new EventSource(`${server}subscribe?session_id=${uuid.getUUId()}`);
@@ -50,7 +52,12 @@ export class IndexComponent implements OnInit {
       const data = JSON.parse(message.data);
       console.log(data);
       if (data.token) {
-        this.router.navigateByUrl(`/home?auth_mobile=true#${data.token}`);
+        const session = {
+          session_id: uuid.getUUId(),
+          id_token: data.token
+        };
+        cookies.set('session', session);
+        this.router.navigateByUrl(`/home`);
       }
       // Display the event data in the `content` div
     });

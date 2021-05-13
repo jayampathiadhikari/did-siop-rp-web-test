@@ -4,6 +4,20 @@
     padding-top: 80px;
 }
 
+.logout-btn{
+  button{
+    margin-top: 20px;
+    max-width: 180px;
+    border-radius: 40px 40px 40px 40px;
+    border: 1px solid white;
+    background-color: white;
+    color: $app-primary;
+    &:active{
+      background-color: $app-primary;
+    }
+  }
+}
+
 .heading{
     h1{
         font-size: 24px;
