@@ -6,14 +6,15 @@
 
 .logout-btn{
   button{
-    margin-top: 20px;
+    margin-top: 10px;
     max-width: 180px;
     border-radius: 40px 40px 40px 40px;
-    border: 1px solid white;
-    background-color: white;
-    color: $app-primary;
+    border: 1px solid $app-primary;
+    background-color: $app-primary;
+    color: white;
     &:active{
-      background-color: $app-primary;
+      background-color: white;
+      color: $app-primary;
     }
   }
 }
