@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DidSiopService } from '../did-siop.service';
 import { faChrome, faFirefox, faEdge, faGoogleDrive } from '@fortawesome/free-brands-svg-icons';
-import uuid from "../uuid";
+import  {UUID} from "../uuid";
 import { Router } from '@angular/router';
 import {environment} from "../../environments/environment";
 import Cookies from 'universal-cookie';
@@ -36,6 +36,7 @@ export class IndexComponent implements OnInit {
   };
 
   constructor(public did_siop: DidSiopService, private router: Router) {
+    const uuid = new UUID();
     this.did_siop_request = environment.did_siop_request;
     const server = 'https://did-siop-web-api.herokuapp.com/';
     did_siop.getRequest().then(res => {
@@ -44,6 +45,7 @@ export class IndexComponent implements OnInit {
     });
     did_siop.getRequest(uuid.getUUId()).then(res => {
       this.did_siop_request_mobile = res;
+      console.log(uuid.getUUId());
       console.log('REQUEST FOR MOBILE', res);
     });
 

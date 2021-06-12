@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 
-class UUID {
+export class UUID {
   private uuid: string;
   constructor() {
     this.uuid = uuidv4();
@@ -11,4 +11,5 @@ class UUID {
   }
 }
 const uuid = new UUID();
+
 export default uuid;
