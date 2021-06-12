@@ -59,6 +59,7 @@ export class IndexComponent implements OnInit {
           id_token: data.token
         };
         cookies.set('session', session);
+        source.close();
         this.router.navigateByUrl(`/home`);
       }
       // Display the event data in the `content` div

@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
 
   onLogout = () => {
     cookies.remove('session');
+    this.did_siop.resetService();
     this.router.navigateByUrl(`/`);
   }
 }

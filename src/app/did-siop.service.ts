@@ -12,6 +12,12 @@ export class DidSiopService {
   private siop_rp: DID_SIOP.RP = undefined;
   private siop_rp_mobile: DID_SIOP.RP = undefined;
 
+  resetService = () => {
+    this.siop_rp_mobile = undefined;
+    this.siop_rp = undefined;
+    console.log('RESET SIOP SERVICE');
+  };
+
   async checkAndInit(uuid?: string) {
     if (uuid) {
       if (this.siop_rp_mobile === undefined) {
