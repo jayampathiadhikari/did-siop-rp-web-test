@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit {
   constructor(public did_siop: DidSiopService, private router: Router) {
     const uuid = new UUID();
     this.did_siop_request = environment.did_siop_request;
-    const server = 'https://did-siop-web-api.herokuapp.com/';
+    const server = 'https://siop-implicit-api.demos.zedeid.com/';
     did_siop.getRequest().then(res => {
       this.did_siop_request = res;
       console.log('REQUEST FOR EXTENSION', res);
