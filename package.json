@@ -11,6 +11,7 @@
     "postinstall": "ng build --prod",
     "heroku-postbuild": "ng build --configuration=production"
   },
+  "homepage": "http://siop-implicit-web.demos.zedeid.com",
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.6",
@@ -33,6 +34,7 @@
     "express": "^4.17.1",
     "jquery": "^3.5.0",
     "ngrok": "^3.3.0",
+    "path": "^0.12.7",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "universal-cookie": "^4.0.4",
